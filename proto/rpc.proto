@@ -1,0 +1,47 @@
+// 声明protobuf版本
+syntax = "proto3";
+// option go_package = "path;name";  path 表示生成的go文件的存放地址，会自动生成目录
+// name表示生成的go文件所属的包名
+option go_package = "../pb";
+package pb;
+
+message GetCouponListReq {
+    int32 AccountID = 1;
+}
+
+message GetCouponListResp {
+    Coupon CouponList = 1;
+}
+
+message GetCouponReq {
+    int32 CouponID = 1;
+}
+
+message GetCouponResp {
+	Coupon Coupon = 1;
+}
+
+
+message Coupon {
+	int32 ID = 1; // 券/卡唯一ID标识
+	CouponType Type = 2; // 类型, 券 / 卡
+	string AccountID = 3; // 用户ID
+	int32 RemainUseCount = 4; // 剩余使用次数
+	int64 IssuanceTimeSec = 5; // 发放时间
+	int64 ValidityTimeSec = 6; // 有效期
+}
+
+enum CouponType {
+    UNKNOWN = 0;
+    CARD = 1; // 卡
+    COUPON = 2;  // 券
+}
+
+
+// 定义服务体
+service CouponsService {
+    // 获取用户优惠券列表
+    rpc GetCouponsByAccountID(GetCouponListReq) returns (GetCouponListResp) {}
+	// 获取用户某张优惠券信息
+	rpc GetCouponsByCouponID(GetCouponReq) returns (GetCouponResp) {}
+}
