@@ -1,0 +1,18 @@
+// 声明protobuf版本
+syntax = "proto3";
+// option go_package = "path;name";  path 表示生成的go文件的存放地址，会自动生成目录
+// name表示生成的go文件所属的包名
+option go_package = "../coupon_proto";
+package pb;
+
+enum CouponType {
+    UNKNOWN = 0;
+    CARD = 1; // 卡
+    COUPON = 2;  // 券
+}
+
+enum DiscountType {
+    UNKNOWNN = 0;
+    AMOUNT = 1;
+    DISCOUNT = 2;
+}

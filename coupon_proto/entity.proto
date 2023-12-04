@@ -1,0 +1,19 @@
+// 声明protobuf版本
+syntax = "proto3";
+import "const.proto";
+// option go_package = "path;name";  path 表示生成的go文件的存放地址，会自动生成目录
+// name表示生成的go文件所属的包名
+option go_package = "../coupon_proto";
+package pb;
+
+message Coupon {
+	int32 ID = 1; // 券/卡唯一ID标识
+	CouponType CouponTypeCouponTypeValue = 2; // 优惠券类型, 券 / 卡
+    DiscountType DiscountTypeValue  = 3; // 优惠类型，金额 / 折扣
+    int64 Amount = 4; // 优惠券额度，适用于减少金额
+    float Discount = 5; // 优惠券折扣，值为百分比
+	string AccountID = 6; // 用户ID
+	int32 RemainUseCount = 7; // 剩余使用次数
+	int64 IssuanceTimeSec = 8; // 发放时间
+	int64 ValidityTimeSec = 9; // 有效期
+}
